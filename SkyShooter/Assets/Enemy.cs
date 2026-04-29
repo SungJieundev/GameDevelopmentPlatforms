@@ -1,13 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 
 namespace KTH
 {
     public class Enemy : MonoBehaviour
     {
-        // ¼Óµµ 10À¸·Î À§¿¡¼­ ¾Æ·¡·Î ÀÌµ¿ÇÏÀÚ
+        // ï¿½Óµï¿½ 10ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Æ·ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½
         public float speed = 10.0f;
 
         Transform targetTr;
@@ -17,17 +19,17 @@ namespace KTH
         void Start()
         {
             targetTr = GameObject.Find("Player").transform;
-            // ÀÏÁ¤È®·ü(50%)·Î ÃßÀûÀ» ÇÏ°Å³ª ¾Æ·¡·Î ³»·Á¿ÀÀÚ 
+            // ï¿½ï¿½ï¿½ï¿½È®ï¿½ï¿½(50%)ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï°Å³ï¿½ ï¿½Æ·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
 
 
-            // ÁÖÀÎ°øÀ» ¦i¾Æ°¡ÀÚ 
-            // ¹éÅÍÀÇ Â÷¸¦ ÀÌ¿ëÇØ¼­ ÁÖÀÎ°ø ¹æÇâÀ» ±¸ÇÔ
+            // ï¿½ï¿½ï¿½Î°ï¿½ï¿½ï¿½ ï¿½iï¿½Æ°ï¿½ï¿½ï¿½ 
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½Î°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-            // ÀÌµ¿°ø½Ä 
+            // ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½ 
             //Vector3 dir = Vector3.down;
             // P <- E
-            int rnd = Random.Range(0, 100); //0~99 ÀÓÀÇÀÇ ¼ýÀÚ¹ÝÈ¯
-            if (rnd < probability) // 50% È®·ü
+            int rnd = Random.Range(0, 100); //0~99 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ú¹ï¿½È¯
+            if (rnd < probability) // 50% È®ï¿½ï¿½
             {
                 dir = targetTr.position - transform.position;
                 dir.Normalize();
@@ -45,6 +47,23 @@ namespace KTH
         {
 
             transform.position += speed * dir * Time.deltaTime;
+        }
+
+        // Rigidbodyê°€ ìžˆì–´ ì¶©ëŒ ìƒí™©ì—ì„œ í˜¸ì¶œ
+        private void OnCollisionEnter(Collision collision)
+        {
+            Destroy(gameObject); // ìžì‹ ì„ íŒŒê´´
+            
+            // Contains: ë¬¸ìžì— í¬í•¨ë˜ì–´ ìžˆëŠ”ê°€ / containsë¡œ ë¹„êµí•˜ê¸°ë³´ë‹¤ íƒœê·¸ë¡œ êµ¬ë¶„
+            //if (collision.gameObject.name.Contains("Bullet") == true)
+            if (collision.gameObject.tag=="Bullet")
+            {
+                Destroy(collision.gameObject); // ì´ì•Œ íŒŒê´´
+            }
+            if (collision.gameObject.name.Contains("Player"))
+            {
+                //í”Œë ˆì´ì–´ ë°ë¯¸ì§€ ì²˜ë¦¬
+            }
         }
     }
 }
