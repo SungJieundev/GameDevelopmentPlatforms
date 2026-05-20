@@ -1,16 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class PlayerFire : MonoBehaviour
 {
     public GameObject[] bulletPrefab;  // ��ǰ�Ѱ� ����
+    public int maxHp = 3;
+    
+    // public이지만 인스펙터에 표시 안됨
+    [System.NonSerialized] public int nHp;
+
+    public Image hpImage;
+    public Image hpWorldImage;
+    public Button reStartBtn;
     
     void Start()
     {
-
+        nHp = maxHp;
+        SetHp();
         
+        // 버튼 꺼두기
+        reStartBtn.gameObject.SetActive(false);
+    }
+
+    public void SetHp()
+    {
+        hpWorldImage.fillAmount = (float)nHp / maxHp;
+        hpImage.fillAmount = (float)nHp / maxHp;
+    }
+
+    public void ReStart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     // 총알 발사하기 

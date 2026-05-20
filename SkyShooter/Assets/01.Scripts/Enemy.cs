@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using UnityEngine.SceneManagement;
 
-namespace KTH
-{
     public class Enemy : MonoBehaviour
     {
         public float speed = 10.0f;
@@ -44,12 +43,28 @@ namespace KTH
             if (collision.gameObject.tag == "Bullet")
             {
                 Destroy(collision.gameObject);
+                UIScoreManager.instance.score += 10;
+                UIScoreManager.instance.SetScore();
             }
 
             if (collision.gameObject.name.Contains("Player"))
             {
-                // Player damage handling can be added here.
+                // 플레이어 데미지 처리
+                PlayerFire pf = collision.gameObject.GetComponent<PlayerFire>();
+
+                pf.nHp--; //체력 1 감소
+                pf.SetHp();
+                
+                if (pf.nHp <= 0)
+                {
+                    // 사망 시 씬 다시 시작하기
+                    //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                    
+                    // 재시작 버튼 활성화
+                    pf.reStartBtn.gameObject.SetActive(true);
+                }
             }
         }
     }
-}
+
+
