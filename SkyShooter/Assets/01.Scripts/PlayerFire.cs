@@ -15,7 +15,7 @@ public class PlayerFire : MonoBehaviour
 
     public Image hpImage;
     public Image hpWorldImage;
-    public Button reStartBtn;
+    public RawImage reStartImage;
     
     void Start()
     {
@@ -23,7 +23,7 @@ public class PlayerFire : MonoBehaviour
         SetHp();
         
         // 버튼 꺼두기
-        reStartBtn.gameObject.SetActive(false);
+        reStartImage.gameObject.SetActive(false);
     }
 
     public void SetHp()

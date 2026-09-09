@@ -12,6 +12,8 @@ using UnityEngine.SceneManagement;
 
         Transform targetTr;
         Vector3 dir;
+    
+        public GameObject explosionPrefab;
 
         void Start()
         {
@@ -42,9 +44,19 @@ using UnityEngine.SceneManagement;
 
             if (collision.gameObject.tag == "Bullet")
             {
+                GameObject explosion = Instantiate(explosionPrefab);
+                explosion.transform.position = transform.position;
+                
                 Destroy(collision.gameObject);
                 UIScoreManager.instance.score += 10;
                 UIScoreManager.instance.SetScore();
+
+                UIScoreManager.instance.killCnt++;
+                if (UIScoreManager.instance.killCnt == 10)
+                {
+                    UIScoreManager.instance.bossEnemy.SetActive(true);
+                    
+                }
             }
 
             if (collision.gameObject.name.Contains("Player"))
@@ -61,7 +73,7 @@ using UnityEngine.SceneManagement;
                     //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                     
                     // 재시작 버튼 활성화
-                    pf.reStartBtn.gameObject.SetActive(true);
+                    pf.reStartImage.gameObject.SetActive(true);
                 }
             }
         }

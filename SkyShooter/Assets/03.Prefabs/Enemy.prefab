@@ -116,6 +116,7 @@ MonoBehaviour:
   speed: 3
   probability: 50
   rotSpeed: 3
+  explosionPrefab: {fileID: 1892078723244562, guid: 46876a2780737ec45a19d62f88e5ce56, type: 3}
 --- !u!54 &3707408454996218015
 Rigidbody:
   m_ObjectHideFlags: 0

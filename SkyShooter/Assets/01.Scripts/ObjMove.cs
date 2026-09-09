@@ -5,32 +5,34 @@ using UnityEngine;
 
 public class ObjMove : MonoBehaviour
 {
-    //public �� ���̸� �����Ϳ� ǥ�ð� ��
     public float speed = 5.0f;
-
+    private Joystick joystick; // 조이스틱 에셋의 클래스
+    
     // Start is called before the first frame update
     void Start()
     {
-        
+        // Joystick을 가지고 있는 오브젝트 반환
+        joystick = FindObjectOfType<Joystick>();
     }
 
     // Update is called once per frame
-    void Update() // 1�ʿ� 200�� ����   
+    void Update() // 1초에 200번
     {
-        Vector2 v = GetInput(); // �Է��� �޴´�.
+        Vector2 v = GetInput(); // 입력을 받는다
         
 
-         Vector3 dir = GetDir(v);  // ������ ���Ѵ�.
-         Moving(dir);   // �����δ�.
+         Vector3 dir = GetDir(v);  // 빙향을 구한다
+         Moving(dir);   // 움직인다
 
         //Moving(GetDir(GetInput()));
     }
 
     Vector2 GetInput()
     {
+        // joystick -1 0 1
         // ����Ű�� �Է¹޾Ƽ� �����¿� ������ ����
-        float h = Input.GetAxis("Horizontal");// -1 0 1
-        float v = Input.GetAxis("Vertical");// Ű�� �ȴ������´� 0��ȯ ����Ű�� -1 ������Ű 1
+        float h = Input.GetAxis("Horizontal") + joystick.Horizontal;// -1 0 1
+        float v = Input.GetAxis("Vertical") + joystick.Vertical; // Ű�� �ȴ������´� 0��ȯ ����Ű�� -1 ������Ű 1
         //    print("�Է°���: " + v);// �����â ���
         return new Vector2(h, v);
     }

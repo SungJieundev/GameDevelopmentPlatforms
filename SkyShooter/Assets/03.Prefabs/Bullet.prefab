@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2633288527070788486}
   - component: {fileID: 2633288527070788485}
   - component: {fileID: 6558808734056852319}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
@@ -219,6 +219,10 @@ PrefabInstance:
     - target: {fileID: 88254551771474376, guid: 5bdc1a77a3a811740815782c79167957, type: 3}
       propertyPath: m_Name
       value: RMB_10
+      objectReference: {fileID: 0}
+    - target: {fileID: 88254551771474376, guid: 5bdc1a77a3a811740815782c79167957, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 752764832668070770, guid: 5bdc1a77a3a811740815782c79167957, type: 3}
       propertyPath: m_RootOrder

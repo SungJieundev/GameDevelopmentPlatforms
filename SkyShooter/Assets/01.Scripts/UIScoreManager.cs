@@ -13,6 +13,11 @@ public class UIScoreManager : MonoBehaviour
     
     public int score = 0;
     public Text scoreText;
+
+    public int killCnt = 0;
+    public GameObject bossEnemy;
+    
+    
     private void Awake()
     {
         if(instance == null) instance = this;
@@ -21,6 +26,7 @@ public class UIScoreManager : MonoBehaviour
     private void Start()
     {
         SetScore();
+        bossEnemy.SetActive(false);
     }
 
     public void SetScore()
